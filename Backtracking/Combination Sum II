@@ -1,0 +1,31 @@
+class Solution {
+    public void comb(int[] arr, int t, int i, List<Integer> b, List<List<Integer>> a){
+        if(t==0){
+            List<Integer> c = new ArrayList<>();
+            for(int k:b)
+            c.add(k);
+            if(!a.contains(c))
+            a.add(c);
+            return;
+        }
+        if(i==arr.length)
+        return ;
+        else{
+            int d = -1;
+            if(t>=arr[i]){
+                b.add(arr[i]);
+                comb(arr,t-arr[i],i+1,b,a);
+                d = b.remove(b.size()-1);
+            }
+            while(i<arr.length-1 && d==arr[i+1]) i++;
+            comb(arr,t,i+1,b,a);
+        }
+    }
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> a = new ArrayList<>();
+        List<Integer> b = new ArrayList<>();
+        Arrays.sort(candidates);
+        comb(candidates,target,0,b,a);
+        return a;
+    }
+}
