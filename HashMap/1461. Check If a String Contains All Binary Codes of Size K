@@ -1,0 +1,13 @@
+class Solution {
+    public boolean hasAllCodes(String s, int k) {
+        if(s.length()<k) return false;
+        HashSet<String> h = new HashSet<>();
+        String bin = s.substring(0,k);
+        h.add(bin);
+        for(int i=1;i<=s.length()-k;i++){
+            bin = s.substring(i,i+k);
+            h.add(bin);
+        }
+        return h.size()==Math.pow(2,k);
+    }
+}
