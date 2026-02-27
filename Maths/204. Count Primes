@@ -1,0 +1,26 @@
+int countPrimes(int n) {
+    int i, c=0, j;
+    if(n<=2)
+    return 0;
+    if(n<=3)
+    return 1;
+    if(n<=5)
+    return 2;
+    bool prime[n + 1];
+    memset(prime, true, sizeof(prime));
+    for(j=2; j*j<=n; j++)
+    {
+        if(prime[j]==true)
+        {
+            for(i=j*j; i<=n; i=i+j)
+            prime[i]=false;
+        }
+    }
+    for(i=2; i<n; i++)
+    {
+        if(prime[i])
+        c++;
+    }
+    return c;
+
+}
