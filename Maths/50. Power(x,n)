@@ -1,0 +1,36 @@
+class Solution {
+    public double myPow(double x, int n) {
+        double z=0.0,c=x;
+        int i;
+        if(n==0)
+        return 1.0;
+        else if(n==-1)
+        return 1/x;
+        else if(n==1)
+        return x;
+        else if(x==0.0 || x==1.0)
+        return x;
+        else if(x==-1)
+        {
+            if(n%2==0)
+            return x*-1;
+            else
+            return x;
+        }
+        else if(n>0)
+        {
+            for(i=1;i<n;i++)
+            z=x*=c;
+        }
+        else
+        {
+            n*=-1;
+            for(i=1;i<n;i++)
+            {
+                x*=c;
+                z=1/x;
+            }   
+        }
+        return z;
+    }
+}
