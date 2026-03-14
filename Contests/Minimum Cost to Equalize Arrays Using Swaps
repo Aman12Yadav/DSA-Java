@@ -1,5 +1,22 @@
-// Using HashMap for frequecy
+Q) You are given two integer arrays nums 1 and nums2 of size n.
+You can perform the following two operations any number of times on these two arrays:
+• Swap within the same array: Choose two indices i and j. Then, choose either to swap and nums1 [jl, or nums2[i] and nums2 [jl). This operation is free of charge.
+nums1 [i]
+• Swap between two arrays: Choose an index i). Then, swap nums1 [il and [nums2 [i]. This operation
+incurs a cost of 1.
+Return an integer denoting the minimum cost to make (nums1) and
+nums2) identical. If this is not possible,
+return -1.
+Example 1:
+Input: nums1 = [10,20], nums2 = [20,10]
+Output: 0
+Explanation:
+• Swap |nums2[0] = 20 and |nums2[1] = 10.
+• nums2) becomes [10, 20]).
+• This operation is free of charge.
+nums1 and (nums2) are now identical. The cost is O.
 
+Solution:
 class Solution {
     public int minCost(int[] nums1, int[] nums2) {
         HashMap<Integer,Integer> freq = new HashMap<>();
