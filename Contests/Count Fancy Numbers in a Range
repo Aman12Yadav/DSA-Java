@@ -1,5 +1,18 @@
-// Brute Force, TLE
+Q) You are given two integers 1) and (r).
+An integer is called good if its digits form a strictly monotone sequence, meaning the digits are strictly increasing or strictly decreasing. All single-digit integers are considered good.
+An integer is called fancy if it is good, or if the sum of its digits is good.
+Return an integer representing the number of fancy integers in the range [l, rl (inclusive).
+A sequence is said to be strictly increasing if each element is strictly greater than its previous one (if exists).
+A sequence is said to be strictly decreasing if each element is strictly less than its previous one (if exists).
+Example 1:
+Input: 1 = 8, r = 10
+Output: 3
+Explanation:
+• 8 and 9 are single-digit integers, so they are good and therefore fancy.
+• 10 has digits [1, 01), which form a strictly decreasing sequence, so 10 is good and thus fancy.
+Therefore, the answer is 3.
 
+Solution:
 class Solution {
     public boolean good(long n){
         if (n < 10) return true;
