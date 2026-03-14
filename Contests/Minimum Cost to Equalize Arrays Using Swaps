@@ -1,0 +1,26 @@
+// Using HashMap for frequecy
+
+class Solution {
+    public int minCost(int[] nums1, int[] nums2) {
+        HashMap<Integer,Integer> freq = new HashMap<>();
+        for(int i:nums1)
+            freq.put(i,freq.getOrDefault(i,0)+1);
+        for(int i:nums2)
+            freq.put(i,freq.getOrDefault(i,0)+1);
+        for(int v : freq.values()){
+            if(v % 2 != 0) 
+                return -1;
+        }
+        HashMap<Integer,Integer> f1 = new HashMap<>();
+        for(int x : nums1)
+            f1.put(x, f1.getOrDefault(x,0)+1);
+        int ans = 0;
+        for(int v:f1.keySet()){
+            int t = freq.get(v)/2;
+            int h = f1.get(v);
+            if(h>t)
+                ans+= (h-t);
+        }
+        return ans;
+    }
+}©leetcode
