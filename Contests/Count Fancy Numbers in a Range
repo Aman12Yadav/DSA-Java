@@ -1,0 +1,35 @@
+// Brute Force, TLE
+
+class Solution {
+    public boolean good(long n){
+        if (n < 10) return true;
+        boolean inc = true, dec = true;
+        long prev = n % 10;
+        n /= 10;
+        while (n > 0) {
+            long cur = n % 10;
+            if (cur >= prev) inc = false;
+            if (cur <= prev) dec = false;
+            if(!inc && !dec) break;
+            prev = cur;
+            n /= 10;
+        }
+    return inc || dec;
+    }
+    public long sumofdigit(long n){
+        long sum = 0;
+        while(n>0){
+            sum += (n%10);
+            n /= 10;
+        }
+        return sum;
+    }
+    public long countFancy(long l, long r) {
+        long ans = 0;
+        for(long i=l;i<=r;i++){
+            if(good(i)) ans++;
+            else if(good(sumofdigit(i))) ans++;
+        }
+        return ans;
+    }
+}©leetcode
