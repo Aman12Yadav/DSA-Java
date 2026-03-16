@@ -1,0 +1,21 @@
+class Solution {
+    public int nthUglyNumber(int n) {
+        PriorityQueue<Long> pq = new PriorityQueue<>();
+        HashSet<Long> h = new HashSet<>();
+        pq.add(1L);
+        h.add(1L);
+        long ugly = 1;
+        int[] fact = {2,3,5};
+        for(int i=0;i<n;i++){
+            ugly = pq.poll();
+            for(int f : fact){
+                long next = ugly*f;
+                if(!h.contains(next)){
+                    pq.add(next);
+                    h.add(next);
+                }
+            }
+        }
+        return (int)ugly;
+    }
+}
