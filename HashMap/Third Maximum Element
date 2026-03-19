@@ -1,0 +1,14 @@
+class Solution {
+    public int thirdMax(int[] nums) {
+        HashSet<Integer> h = new HashSet<>();
+        for(int i:nums)
+        h.add(i);
+        ArrayList<Integer> l = new ArrayList<>();
+        for(int i:h)
+        l.add(i);
+        Collections.sort(l,Collections.reverseOrder());
+        if(l.size()>2)
+        return l.get(2);
+        return l.get(0);
+    }
+}
