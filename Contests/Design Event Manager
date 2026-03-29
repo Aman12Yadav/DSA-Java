@@ -1,0 +1,50 @@
+Question:
+You are given an initial list of events, where each event has a unique eventId and a priority.
+Implement the EventManager class:
+• EventManager (int [][] events) Initializes the manager with the given events, where events [i] = [eventIdi, priorityil.
+void updatePriority(int eventId, int newPriority) Updates the priority of the active event with id eventId to newPriority.
+int pollHighest () Removes and returns the eventId of the active event with the highest priority. If multiple active events have the same priority, return the smallest eventId among them. If there are no active events, return - 1.
+An event is called active if it has not been removed by pol Highest ()).
+Example 1:
+Input:
+["EventManager", "pollHighest", "updatePriority", "pollHighest", "pollHighest"]
+［［［［5,71，［2,71，［9,4111，［1，［9，71，［1，［11
+Output:
+[null, 2, null, 5, 9]
+
+Solution:
+class EventManager {
+    public PriorityQueue<int[]> pq;
+    public HashMap<Integer, Integer> h;
+
+    public EventManager(int[][] events) {
+        pq = new PriorityQueue<>((a, b) -> {
+            if (b[0] != a[0]) return b[0] - a[0];
+            return a[1] - b[1];
+        });
+        h = new HashMap<>();
+        for (int[] e : events) {
+            int id = e[0], p = e[1];
+            pq.add(new int[]{p, id});
+            h.put(id, p);
+        }
+    }
+    
+    public void updatePriority(int eventId, int newPriority) {
+        h.put(eventId, newPriority);
+        pq.add(new int[]{newPriority, eventId});
+    }
+    
+    public int pollHighest() {
+        while (!pq.isEmpty()) {
+            int[] top = pq.poll();
+            int priority = top[0];
+            int id = top[1];
+            if (h.containsKey(id) && h.get(id) == priority) {
+                h.remove(id);
+                return id;
+            }
+        }
+        return -1;
+    }
+}
