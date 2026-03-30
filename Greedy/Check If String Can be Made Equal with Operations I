@@ -1,0 +1,22 @@
+class Solution {
+    public boolean canBeEqual(String s1, String s2) {
+        int i,j;
+        char[] ch1 = s1.toCharArray();
+        char[] ch2 = s2.toCharArray();
+        for(i=0;i<3;i++){
+            if(ch1[i]!=ch2[i]){
+                for(j=i+1;j<4;j++){
+                    if(ch1[j]==ch2[i] && (j-i)==2){
+                        char temp = ch1[i];
+                        ch1[i] = ch1[j];
+                        ch1[j] = temp;
+                        break;
+                    }
+                }
+                if(j==4)
+                    return false;
+            }
+        }
+        return ch1[3]==ch2[3];
+    }
+}
