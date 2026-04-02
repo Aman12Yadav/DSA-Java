@@ -1,0 +1,47 @@
+class Solution {
+    int[][][] dp;
+    public int maximumAmount(int[][] coins) {
+        int m = coins.length;
+        int n = coins[0].length;
+        dp = new int[m][n][3];
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++)
+                Arrays.fill(dp[i][j], Integer.MIN_VALUE);
+        }
+        return solve(coins, m-1, n-1, 2);
+    }
+    private int solve(int[][] coins, int i, int j, int k) {
+        if(i < 0 || j < 0) 
+        return Integer.MIN_VALUE;
+        if(i == 0 && j == 0) {
+            if(coins[0][0] >= 0)
+             return coins[0][0];
+            else {
+                if(k > 0) 
+                return 0;
+                else 
+                return coins[0][0];
+            }
+        }
+        if(dp[i][j][k] != Integer.MIN_VALUE)
+            return dp[i][j][k];
+        int up = solve(coins, i-1, j, k);
+        int left = solve(coins, i, j-1, k);
+        int bestPrev = Math.max(up, left);
+        int ans;
+        if(coins[i][j] >= 0) {
+            ans = coins[i][j] + bestPrev;
+        } 
+        else {
+            int takeLoss = coins[i][j] + bestPrev;
+            int neutralize = Integer.MIN_VALUE;
+            if(k > 0) {
+                int up2 = solve(coins, i-1, j, k-1);
+                int left2 = solve(coins, i, j-1, k-1);
+                neutralize = Math.max(up2, left2);
+            }
+            ans = Math.max(takeLoss, neutralize);
+        }
+        return dp[i][j][k] = ans;
+    }
+}
