@@ -1,0 +1,38 @@
+class Solution {
+    public int maximumSwap(int num) {
+        int n = num;
+        int i,c = 0;
+        while(n>0){
+            c++;
+            n/=10;
+        }
+        int[] number = new int[c];
+        n = num;
+        for(i=c-1;i>=0;i--){
+            number[i] = n%10;
+            n/=10;
+        }
+        int idx1 = -1, idx2 = -1;
+        for (i = 0; i < c; i++) {
+            int max = i;
+            for (int j = i + 1; j < c; j++) {
+                if (number[j] >= number[max]) {
+                    max = j;
+                }
+            }
+            if (number[max] > number[i]) {
+                idx1 = i;
+                idx2 = max;
+                break;
+            }
+        }
+        if (idx1 == -1) return num;
+        int temp = number[idx1];
+        number[idx1] = number[idx2];
+        number[idx2] = temp;
+
+        for(i=0;i<c;i++)
+        n = (n*10)+number[i];
+        return n;
+    }
+}
