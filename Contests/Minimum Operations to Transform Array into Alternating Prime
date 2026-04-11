@@ -1,0 +1,52 @@
+Question:
+You are given an integer array nums.
+An array is considered alternating prime if:
+• Elements at even indices (0-based) are prime numbers.
+• Elements at odd indices are non-prime numbers.
+In one operation, you may increment any element by 1.
+Return the minimum number of operations required to transform (nums into an alternating prime array.
+A prime number is a natural number greater than 1 with only two factors, 1 and itself.
+Example 1:
+Input: nums = [1,2,3,4]
+Output: 3
+Explanation:
+• The element at index 0 must be prime. Increment nums [0] = 1 to 2, using 1 operation.
+• The element at index 1 must be non-prime. Increment |nums [1] = 2) to 4, using 2 operations.
+• The element at index 2 is already prime.
+• The element at index 3 is already non-prime.
+Total operations = 1 + 2 = 3).
+
+
+Solution:
+class Solution {
+    private boolean isPrime(int num) {
+        if (num < 2) return false;
+        if (num == 2) return true;
+        if (num % 2 == 0) return false;
+        for (int i = 3; i * i <= num; i += 2) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+    public int minOperations(int[] nums) {
+        int n = nums.length;
+        int ans = 0;
+        for(int i=0;i<n;i++){
+            if(i%2==0){
+                int c = 0;
+                int x = nums[i];
+                while(true){
+                    if(isPrime(x)) break;
+                    c++;
+                    x++;
+                }
+                ans+=c;
+            }
+            else{
+                if(nums[i]==2) ans+=2;
+                else if(isPrime(nums[i])) ans++;
+            }
+        }
+        return ans;
+    }
+}©leetcode
