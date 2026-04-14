@@ -1,0 +1,15 @@
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+        HashMap<Integer,Integer> h = new HashMap<>();
+        List<Integer> l = new ArrayList<>();
+        for(int i=0;i<nums.length;i++)
+        h.put(nums[i],h.getOrDefault(nums[i],0)+1);
+        for(int i:h.keySet())
+        {
+            int a = h.get(i);
+            if(a>1)
+            l.add(i);
+        }
+        return l;
+    }
+}
