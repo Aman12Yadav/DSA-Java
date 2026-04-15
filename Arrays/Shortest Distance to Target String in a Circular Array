@@ -1,0 +1,13 @@
+class Solution {
+    public int closestTarget(String[] words, String target, int startIndex) {
+        int n = words.length;
+        for(int i=0;i<n;i++){
+            int f=(startIndex+i)%n;
+            int b=(startIndex-i)%n;
+            if(b<0) b=n+b;
+            if(words[f].equals(target)) return i;
+            if(words[b].equals(target)) return i;
+        }
+        return -1;
+    }
+}
