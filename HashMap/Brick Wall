@@ -1,0 +1,19 @@
+class Solution {
+    public int leastBricks(List<List<Integer>> wall) {
+        int n = wall.size(), sum=0;
+        Map<Integer, Integer> h = new HashMap<>();
+        for(int i=0;i<n;i++){
+            sum = 0;
+            List<Integer> row = wall.get(i);
+            for(int j = 0; j < row.size() - 1; j++){
+                sum += row.get(j);
+                h.put(sum,h.getOrDefault(sum,0)+1);
+            }
+        }
+        int max = 0;
+        for(int i:h.keySet()){
+            max = Math.max(max,h.get(i));
+        }
+        return n-max;
+    }
+}
