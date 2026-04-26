@@ -1,0 +1,53 @@
+Question:
+You are given a string s consisting of lowercase English characters.
+Rearrange only the vowels in the string so that they appear in non-increasing order of their frequency.
+If multiple vowels have the same frequency, order them by the position of their first occurrence in S•
+Return the modified string.
+Vowels are 'a'), 'e'), "i'. ('o', and "u').
+The frequency of a letter is the number of times it occurs in the string.
+Example 1:
+Input: s = "leetcode"
+Output: "leetcedo"
+Explanation:
+• Vowels in the string are T'e', 'e', 'o', 'e'l with frequencies: e = 3, o = 1.
+• Sorting in non-increasing order of frequency and placing them back into the vowel positions results in "leetcedo".
+
+Solutio:
+class Solution {
+    public boolean isVowel(char ch) {
+        return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
+    }
+    public String sortVowels(String s) {
+        int n = s.length();
+        Map<Character, Integer> freq = new HashMap<>();
+        Map<Character, Integer> first = new HashMap<>();
+        for(int i=0;i<n;i++){
+            char ch = s.charAt(i);
+            if(isVowel(ch)){
+                freq.put(ch,freq.getOrDefault(ch,0)+1);
+                first.putIfAbsent(ch,i);
+            }
+        }
+        PriorityQueue<Character> pq = new PriorityQueue<>((a,b)->{
+            if(!freq.get(a).equals(freq.get(b))){
+            return freq.get(b)-freq.get(a);
+            }
+        return first.get(a)-first.get(b);
+        });
+
+        pq.addAll(freq.keySet());
+        List<Character> sort = new ArrayList<>();
+        while(!pq.isEmpty()){
+            char ch = pq.poll();
+            int c = freq.get(ch);
+            while(c-- >0) sort.add(ch);
+        }
+        StringBuilder res = new StringBuilder(s);
+        int id=0;
+        for(int i=0;i<n;i++){
+            if(isVowel(s.charAt(i)))
+                res.setCharAt(i,sort.get(id++));
+        }
+        return res.toString();
+    }
+}
