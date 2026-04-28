@@ -1,0 +1,22 @@
+class Solution {
+    public int minOperations(int[][] grid, int x) {
+        int m = grid.length;
+        int n = grid[0].length;
+        int c = 0;
+        int[] arr = new int[m*n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++)
+            arr[c++] = grid[i][j];
+        }
+        int rem = arr[0]%x;
+        for(int i:arr){
+            if(i%x!=rem) return -1;
+        }
+        Arrays.sort(arr);
+        int median = arr[arr.length/2];
+        int ans = 0;
+        for(int i:arr)
+        ans += Math.abs(i-median)/x;
+        return ans;
+    }
+}
