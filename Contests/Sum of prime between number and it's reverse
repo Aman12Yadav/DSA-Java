@@ -1,0 +1,27 @@
+class Solution {
+    public int reverse(int n){
+        int rev = 0;
+        while(n>0){
+            rev = (rev*10)+(n%10);
+            n /= 10;
+        }
+        return rev;
+    }
+    public boolean prime(int n){
+        if(n<=1) return false;
+        for(int i=2;i*i<=n;i++){
+            if(n%i==0) return false;
+        }
+        return true;
+    }
+    public int sumOfPrimesInRange(int n) {
+        int rev = reverse(n);
+        int a = Math.min(rev,n);
+        int b = Math.max(rev,n);
+        int ans = 0;
+        for(int i=a;i<=b;i++){
+            if(prime(i)) ans+=i;
+        }
+        return ans;
+    }
+}
