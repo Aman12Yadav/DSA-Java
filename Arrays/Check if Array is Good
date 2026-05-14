@@ -1,0 +1,23 @@
+class Solution {
+    public boolean isGood(int[] nums) {
+        int i,c=1,n=nums.length;
+        Arrays.sort(nums);
+        if(n==1)
+        return false;
+        else if(n>nums[n-1]+1||n<nums[n-1]+1||nums[n-1]!=nums[n-2])
+        return false;
+        else
+        {
+            for(i=0;i<n-1;i++)
+            {
+                if(nums[i]!=c)
+                break;
+                c++;
+            }
+            if(i==n-1)
+            return true;
+            else
+            return false;
+        }
+    }
+}
