@@ -1,0 +1,42 @@
+Question:
+You are given a sorted integer array nums and an integer k.
+Return an array such that each distinct element appears at most k times, while preserving the relative order of the elements in nums.
+Note: If a distinct element appears at least k times, then it must appear exactly k times in the resulting array.
+Example 1:
+Input: nums = [1,1,1,2,2,3], k = 2
+Output: [1,1,2,2,3]
+Explanation:
+Each element can appear at most 2 times.
+The element 1 appears 3 times, so only 2 occurrences are kept.
+The element 2 appears 2 times, so both occurrences are kept.
+The element 3 appears 1 time, so it is kept.
+Thus, the resulting array is [1, 1, 2, 2, 3].
+
+Solution:
+class Solution {
+    public int[] limitOccurrences(int[] nums, int k) {
+        List<Integer> l = new ArrayList<>();
+        int n=nums.length, c=1, prev = nums[0];
+        l.add(prev);
+        for(int i=1;i<n;i++){
+            if(nums[i]==prev && c<k){
+                l.add(nums[i]);
+                c++;
+            }
+            else if(nums[i]!=prev){
+                prev = nums[i];
+                l.add(prev);
+                c=1;
+            }
+            else{
+                c++;
+                continue;
+            }
+        }
+        int[] ans = new int[l.size()];
+        int x = 0;
+        for(int i:l)
+        ans[x++] = i;
+        return ans;
+    }
+}
