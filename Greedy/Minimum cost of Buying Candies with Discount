@@ -1,0 +1,11 @@
+class Solution {
+    public int minimumCost(int[] cost) {
+        Arrays.sort(cost, Collections.reverseOrder());
+        int ans = 0;
+        for(int i=0;i<cost.length;i++){
+            if((i+1)%3==0) continue;
+            ans += cost[i];
+        }
+        return ans;
+    }
+}
