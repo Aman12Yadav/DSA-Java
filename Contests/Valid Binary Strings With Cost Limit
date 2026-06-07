@@ -1,0 +1,52 @@
+Question:
+You are given two integers n and k.
+The cost of a binary string (s is defined as the sum of all indices i) (0-based) such that s [i] = '1').
+A binary string is considered valid if:
+• It does not contain two consecutive
+'1'
+characters.
+• Its cost is less than or equal to k).
+Return a list of all valid binary strings of length n in any order.
+Example 1:
+Input: n = 3, k = 1
+Output: ["000", "010", "100"]
+Explanation:
+The binary strings of length 3 without consecutive
+'1'
+characters are:
+Among these, the strings with cost less than or equal to k = 1 are "000"
+, "010") and "100".
+Thus, the valid strings are ["000", "010", "100"].
+"000"
+: cost = 0
+• "100"
+cost =0
+"010"
+cost = 1
+"001"
+"101"
+cost = 2
+cost = 0 + 2 = 2
+
+Solution:
+class Solution {
+    public List<String> generateValidStrings(int n, int k) {
+        List<String> ans = new ArrayList<>();
+        char[] curr = new char[n];
+        dfs(0,n,k,0,false,curr,ans);
+        return ans;
+    }
+    public void dfs(int idx, int n, int k, int cost, boolean prevone, char[] curr, List<String> ans){
+        if(cost>k) return;
+        if(idx == n){
+            ans.add(new String(curr));
+            return;
+        }
+        curr[idx] = '0';
+        dfs(idx+1,n,k,cost,false,curr,ans);
+        if(!prevone){
+            curr[idx] = '1';
+            dfs(idx+1,n,k,cost+idx,true,curr,ans);
+        }
+    }
+}
