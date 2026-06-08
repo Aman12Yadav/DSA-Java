@@ -1,0 +1,18 @@
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        int n = nums.length,s=0,c=0;
+        int[] ans = new int[n];
+        for(int i:nums){
+            if(i<pivot) ans[c++]=i;
+            else if(i==pivot) s++;
+        }
+        while(s>0){
+            ans[c++] = pivot;
+            s--;
+        }
+        for(int i:nums){
+            if(i>pivot) ans[c++] = i;
+        }
+        return ans;
+    }
+}
