@@ -1,0 +1,27 @@
+Question:
+You are given a positive integer (n).
+Let digitSum be the sum of the digits of n, and let squaresum be the sum of the squares of the digits of n.
+An integer is called good if squareSum - digitSum >= 50.
+Return (true if n is good. Otherwise, return (false).
+Example 1:
+Input: n = 1000
+Output: false
+Explanation:
+• The digits of 1000 are 1, 0, 0, and O.
+• The digitSum is 1 +0+0+0=1.
+• The (squareSum)is 12+02 + 02 + 02 = 1).
+• The squareSum - digitSum] is 1 - 1 = 0. As O is not greater than or equal to 50, the output is false.
+
+Solution:
+class Solution {
+    public boolean checkGoodInteger(int n) {
+        int s1=0, s2=0;
+        while(n>0){
+            int d = n%10;
+            s1 += d;
+            s2 += (d*d);
+            n /= 10;
+        }
+        return (s2-s1)>=50;
+    }
+}
