@@ -27,6 +27,7 @@ class Solution {
             else
             s.push(Integer.valueOf(tokens[i]));
         }
+
         return s.pop();
     }
 }
